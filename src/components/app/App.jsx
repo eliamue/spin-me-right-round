@@ -2,9 +2,8 @@ import React from 'react';
 import { useRecord } from '../hooks/useRecord';
 
 function App() {
-  const { current, undo, redo, record } = useRecord('#FF0000');
-
-  return (
+  const { current, undo, redo, record } = useRecord('04FF23');
+console.log('-----current-----', current);  return (
     <>
       <button onClick={undo}>undo</button>
       <button onClick={redo}>redo</button>
