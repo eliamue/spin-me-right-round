@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useRecord = (initialColor = '#123456') => {
+export const useRecord = (initialColor = '#541812') => {
   const [current, setCurrent] = useState(initialColor);
   const [history, setHistory] = useState([]);
   const record = (newColor) => {
@@ -22,4 +22,3 @@ export const useRecord = (initialColor = '#123456') => {
 
   return { undo, redo, current, record };
 };
-
