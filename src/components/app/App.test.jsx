@@ -7,5 +7,9 @@ describe('App', () => {
     const { container } = render(<App />);
 
     expect(container).not.toBeEmptyDOMElement();
+
+    const swatch = screen.getByRole('display', { name: 'swatch' });
+
+    expect(swatch.style.backgroundColor).toEqual('rgb(18, 52, 86)');
   });
 });
