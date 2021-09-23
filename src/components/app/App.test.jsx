@@ -27,19 +27,34 @@ describe('App', () => {
     fireEvent.change(color3, yellow);
     waitFor(() => expect(color3).toHaveStyle({ 'background-color': yellow }));
   });
-});
 
-it('Changes color of swatch back to previously chosen color after hitting the undo button', () => {
-  render(<App />);
+  it('Changes color of swatch back to previously chosen color after hitting the undo button', () => {
+    render(<App />);
 
-  const undo = screen.getByRole('unbutton', { name: 'undo-button' });
-  const prevcolor = screen.getByRole('color', { name: 'color-input' });
+    const undo = screen.getByRole('unbutton', { name: 'undo-button' });
+    const prevcolor = screen.getByRole('color', { name: 'color-input' });
 
-  fireEvent.change(prevcolor, yellow);
-  fireEvent.change(prevcolor, green);
-  fireEvent.change(prevcolor, blue);
-  fireEvent.click(undo);
-  return waitFor(() =>
-    expect(prevcolor).toHaveStyle({ 'background-color': 'ButtonFace' })
-  );
+    fireEvent.change(prevcolor, yellow);
+    fireEvent.change(prevcolor, green);
+    fireEvent.change(prevcolor, blue);
+    fireEvent.click(undo);
+    return waitFor(() =>
+      expect(prevcolor).toHaveStyle({ 'background-color': 'ButtonFace' })
+    );
+  });
+
+  it('Changes color of swatch back to color previously selected before hitting the undo button, by clicking the redo button', () => {
+    render(<App />);
+
+    const redo = screen.getByRole('rebutton', { name: 'redo-button' });
+    const prevcolor = screen.getByRole('color', { name: 'color-input' });
+
+    fireEvent.change(prevcolor, yellow);
+    fireEvent.change(prevcolor, green);
+    fireEvent.change(prevcolor, blue);
+    fireEvent.click(redo);
+    return waitFor(() =>
+      expect(prevcolor).toHaveStyle({ 'background-color': 'ButtonFace' })
+    );
+  });
 });
