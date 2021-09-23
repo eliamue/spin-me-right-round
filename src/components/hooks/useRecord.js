@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const useRecord = (initialColor = '04FF23') => {
+export const useRecord = (initialColor = 'red') => {
   const [current, useCurrent] = useState(initialColor);
   const [history] = useState([]);
   const record = () => {
