@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 export const useRecord = (initialColor = 'red') => {
-  const [current, useCurrent] = useState(initialColor);
-  const [history] = useState([]);
-  const record = () => {
-
+  const [current, setCurrent] = useState(initialColor);
+  const [history, setHistory] = useState([]);
+  const record = (newColor) => {
+    setCurrent(newColor);
   };
   
   const undo = () => {
@@ -17,9 +16,9 @@ export const useRecord = (initialColor = 'red') => {
   };
 
   useEffect(() => {
-    history.push(current);
+    setHistory((prev) => [...prev, current]);
     console.log('-----history-----', history);
-  }, []);
+  }, [current]);
 
   return { undo, redo, current, record };
 };

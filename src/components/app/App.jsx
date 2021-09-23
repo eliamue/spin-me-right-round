@@ -3,7 +3,7 @@ import { useRecord } from '../hooks/useRecord';
 
 function App() {
   const { current, undo, redo, record } = useRecord('red');
-console.log('-----current-----', current);  return (
+  return (
     <>
       <button onClick={undo}>undo</button>
       <button onClick={redo}>redo</button>
