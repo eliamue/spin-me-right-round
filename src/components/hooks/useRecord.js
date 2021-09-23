@@ -4,6 +4,7 @@ export const useRecord = (initialColor = '#541812') => {
   const [current, setCurrent] = useState(initialColor);
   const [history, setHistory] = useState([initialColor]);
   const [index, setIndex] = useState(0);
+  const [isDisabled, setDisabled] = useState(false);
 
   const record = (newColor) => {
     setHistory((prev) => [
@@ -12,14 +13,19 @@ export const useRecord = (initialColor = '#541812') => {
       ...prev.slice(index + 1),
     ]);
     setCurrent(newColor);
+    setDisabled(false);
     console.log(history);
   };
 
   const undo = () => {
-    setCurrent(history[index - 1]);
+    if (index >= 0) setCurrent(history[index - 1]);
+    if (index === 1) setDisabled(true);
   };
 
-  const redo = () => {};
+  const redo = () => {
+    if (index <= history.length) setCurrent(history[index + 1]) && setDisabled(false);
+    // if (index === history.length) setDisabled(true);
+  };
 
   useEffect(() => {
     setIndex(history.indexOf(current));
@@ -27,5 +33,5 @@ export const useRecord = (initialColor = '#541812') => {
   //     setHistory((prev) => [...prev, current]);
   //   }, [current]);
 
-  return { undo, redo, current, record, history, index };
+  return { undo, redo, current, record, history, index, isDisabled };
 };
